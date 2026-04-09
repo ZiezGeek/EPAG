@@ -1,51 +1,661 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Evander Petroleum and Gas</title>
+<title>ÉPAG – Evander Petroleum and Gas</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-body {margin:0;font-family:Arial, sans-serif;background:#0b0f1a;color:white;}
-header {background:#0b0f1a;padding:20px;text-align:center;}
-header img {height:80px;}
-nav {background:#0d1b2a;padding:10px;text-align:center;}
-nav a {color:#ffd60a;margin:0 15px;text-decoration:none;font-weight:bold;}
-.hero {padding:60px 20px;text-align:center;background:linear-gradient(to right,#0d1b2a,#1b263b);}
-.hero h1 {font-size:40px;color:#ffd60a;}
-.section {padding:40px 20px;text-align:center;}
-.cards {display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
-.card {background:#1b263b;padding:20px;border-radius:10px;width:250px;}
-.footer {background:#0d1b2a;padding:20px;text-align:center;font-size:14px;}
-.btn {background:#ff3c38;color:white;padding:10px 20px;border:none;border-radius:5px;text-decoration:none;}
+  :root {
+    --navy: #1a2a5e;
+    --red: #e63012;
+    --green: #7ec820;
+    --light: #f5f7fa;
+    --white: #ffffff;
+    --shadow: 0 4px 24px rgba(26,42,94,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Barlow', sans-serif; background: var(--light); color: var(--navy); min-height: 100vh; }
+
+  /* NAV */
+  nav {
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px; height: 64px;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo img { height: 44px; }
+  .nav-logo span { color: white; font-family: 'Barlow Condensed', sans-serif; font-size: 1.3rem; font-weight: 700; letter-spacing: 1px; }
+  .nav-links { display: flex; gap: 6px; }
+  .nav-links button {
+    background: none; border: none; color: rgba(255,255,255,0.75);
+    font-family: 'Barlow', sans-serif; font-size: 0.95rem; font-weight: 500;
+    cursor: pointer; padding: 8px 16px; border-radius: 6px; transition: all 0.2s;
+  }
+  .nav-links button:hover, .nav-links button.active { background: rgba(255,255,255,0.12); color: white; }
+  .nav-links button.active { color: var(--green); font-weight: 700; }
+
+  /* PAGES */
+  .page { display: none; padding: 32px 16px; max-width: 900px; margin: 0 auto; }
+  .page.active { display: block; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 60%, #2a3f8a 100%);
+    border-radius: 16px; padding: 48px 32px; margin-bottom: 32px;
+    color: white; text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .hero h1 { font-family: 'Barlow Condensed', sans-serif; font-size: 2.6rem; font-weight: 800; letter-spacing: 1px; }
+  .hero p { font-size: 1.05rem; color: rgba(255,255,255,0.8); margin-top: 8px; }
+  .flame-icon { font-size: 3rem; margin-bottom: 12px; }
+
+  /* CARDS */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px; }
+  .card {
+    background: white; border-radius: 12px; padding: 24px 20px;
+    box-shadow: var(--shadow); text-align: center; border-top: 4px solid var(--navy);
+    transition: transform 0.2s;
+  }
+  .card:hover { transform: translateY(-3px); }
+  .card .icon { font-size: 2.2rem; margin-bottom: 10px; }
+  .card h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--navy); }
+  .card p { font-size: 0.85rem; color: #666; margin-top: 4px; }
+
+  /* FORMS & INPUTS */
+  .form-card { background: white; border-radius: 14px; padding: 28px; box-shadow: var(--shadow); margin-bottom: 24px; }
+  .form-card h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--navy); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+  label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--navy); margin-bottom: 5px; margin-top: 14px; }
+  input, select, textarea {
+    width: 100%; padding: 11px 14px; border: 1.5px solid #d0d8e8;
+    border-radius: 8px; font-family: 'Barlow', sans-serif; font-size: 0.97rem;
+    color: var(--navy); background: #f9fafc; transition: border 0.2s;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--navy); outline: none; background: white; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 24px; border: none; border-radius: 8px;
+    font-family: 'Barlow', sans-serif; font-size: 0.97rem; font-weight: 600;
+    cursor: pointer; transition: all 0.2s; text-decoration: none;
+  }
+  .btn-primary { background: var(--navy); color: white; }
+  .btn-primary:hover { background: #2a3f8a; }
+  .btn-whatsapp { background: #25D366; color: white; }
+  .btn-whatsapp:hover { background: #1da851; }
+  .btn-red { background: var(--red); color: white; }
+  .btn-red:hover { background: #c5270f; }
+  .btn-green { background: var(--green); color: white; }
+  .btn-block { width: 100%; justify-content: center; margin-top: 16px; }
+  .btn-sm { padding: 7px 14px; font-size: 0.85rem; border-radius: 6px; }
+
+  /* ORDER LIST */
+  .order-list { display: flex; flex-direction: column; gap: 12px; }
+  .order-item {
+    background: white; border-radius: 10px; padding: 16px 18px;
+    box-shadow: var(--shadow); display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 10px;
+    border-left: 5px solid var(--navy);
+  }
+  .order-item.status-received { border-left-color: #f0a500; }
+  .order-item.status-onway { border-left-color: #2196F3; }
+  .order-item.status-out { border-left-color: var(--green); }
+  .order-item.status-delivered { border-left-color: #4caf50; }
+  .order-info h4 { font-weight: 700; font-size: 1rem; color: var(--navy); }
+  .order-info p { font-size: 0.83rem; color: #666; margin-top: 2px; }
+  .status-badge {
+    padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .badge-received { background: #fff3cd; color: #856404; }
+  .badge-onway { background: #cce5ff; color: #004085; }
+  .badge-out { background: #d4edda; color: #155724; }
+  .badge-delivered { background: #c3e6cb; color: #155724; }
+  .order-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  /* TRACK */
+  .track-steps { display: flex; flex-direction: column; gap: 0; margin: 24px 0; }
+  .track-step { display: flex; gap: 16px; align-items: flex-start; }
+  .step-indicator { display: flex; flex-direction: column; align-items: center; }
+  .step-dot {
+    width: 34px; height: 34px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; background: #e0e4ef; color: #aaa; flex-shrink: 0;
+    border: 2px solid #e0e4ef; transition: all 0.3s;
+  }
+  .step-dot.done { background: var(--green); color: white; border-color: var(--green); }
+  .step-dot.active { background: var(--navy); color: white; border-color: var(--navy); animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(26,42,94,0.3)} 50%{box-shadow:0 0 0 8px rgba(26,42,94,0)} }
+  .step-line { width: 2px; height: 32px; background: #e0e4ef; margin: 2px 0; }
+  .step-line.done { background: var(--green); }
+  .step-content { padding-bottom: 28px; }
+  .step-content h4 { font-weight: 700; font-size: 0.97rem; color: var(--navy); }
+  .step-content p { font-size: 0.83rem; color: #888; margin-top: 2px; }
+
+  /* PRODUCTS */
+  .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-bottom: 20px; }
+  .product-tile {
+    background: white; border-radius: 12px; padding: 20px 14px; text-align: center;
+    box-shadow: var(--shadow); cursor: pointer; border: 2.5px solid transparent;
+    transition: all 0.2s;
+  }
+  .product-tile:hover { border-color: var(--navy); }
+  .product-tile.selected { border-color: var(--navy); background: #eef1fa; }
+  .product-tile .kg { font-family: 'Barlow Condensed', sans-serif; font-size: 2rem; font-weight: 800; color: var(--navy); }
+  .product-tile .price { font-size: 0.8rem; color: var(--red); font-weight: 700; margin-top: 4px; }
+  .product-tile .desc { font-size: 0.75rem; color: #888; }
+
+  /* CONTACT BAR */
+  .contact-bar {
+    background: var(--navy); color: white; text-align: center;
+    padding: 16px; margin-top: 40px; border-radius: 12px;
+    font-size: 0.92rem;
+  }
+  .contact-bar a { color: var(--green); font-weight: 700; text-decoration: none; }
+
+  /* ALERT */
+  .alert {
+    padding: 12px 16px; border-radius: 8px; margin-bottom: 16px;
+    font-size: 0.9rem; font-weight: 500;
+  }
+  .alert-success { background: #d4edda; color: #155724; }
+  .alert-info { background: #cce5ff; color: #004085; }
+  .alert-warning { background: #fff3cd; color: #856404; }
+
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 1.3rem; font-weight: 800;
+    color: var(--navy); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+  }
+  .divider { border: none; border-top: 1.5px solid #e0e4ef; margin: 20px 0; }
+  .text-center { text-align: center; }
+  .mt-8 { margin-top: 8px; }
+  .mt-16 { margin-top: 16px; }
+  .flex-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .empty-state { text-align: center; padding: 40px 20px; color: #aaa; }
+  .empty-state .icon { font-size: 3rem; }
+  .empty-state p { margin-top: 8px; font-size: 0.95rem; }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 1.9rem; }
+    .nav-logo span { display: none; }
+    .nav-links button { padding: 8px 10px; font-size: 0.82rem; }
+    .page { padding: 16px 10px; }
+  }
 </style>
 </head>
-<body><header>
-<img src="logo.png" alt="EPAG Logo">
-</header><nav>
-<a href="#home">Home</a>
-<a href="#services">Services</a>
-<a href="#about">About</a>
-<a href="#contact">Contact</a>
-</nav><section class="hero" id="home">
-<h1>Evander Petroleum and Gas</h1>
-<p>Keeping TEKS moving with top-quality fuel, certified Afrox gas, lubricants, and Suremix.</p>
-<a class="btn" href="#contact">Contact Us</a>
-</section><section class="section" id="services">
-<h2>Our Products & Services</h2>
-<div class="cards">
-<div class="card"><h3>Diesel 50ppm</h3><p>High-quality diesel fuel for all engines.</p></div>
-<div class="card"><h3>Paraffin</h3><p>Reliable paraffin for everyday use.</p></div>
-<div class="card"><h3>Gas Supply</h3><p>9kg, 14kg, 19kg & 48kg cylinders available.</p></div>
-<div class="card"><h3>Gas Refills</h3><p>Fast and efficient gas refilling service.</p></div>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <!-- Logo placeholder — replace src with your logo file -->
+    <img src="epag-logo.png" alt="ÉPAG Logo" onerror="this.style.display='none'">
+    <span>ÉPAG Gas</span>
+  </div>
+  <div class="nav-links">
+    <button class="active" onclick="showPage('home')">🏠 Home</button>
+    <button onclick="showPage('order')">📦 Order</button>
+    <button onclick="showPage('track')">📍 Track</button>
+    <button onclick="showPage('admin')">🔧 Admin</button>
+  </div>
+</nav>
+
+<!-- ===== HOME PAGE ===== -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="flame-icon">🔥</div>
+    <h1>ÉVANDER PETROLEUM AND GAS</h1>
+    <p>Fast, reliable gas delivery — straight to your door in Evander & surrounds</p>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="icon">📞</div>
+      <h3>Call to Order</h3>
+      <p><a href="tel:0176322026" style="color:var(--red);font-weight:700;">017 632 2026</a></p>
+    </div>
+    <div class="card">
+      <div class="icon">📦</div>
+      <h3>Order Online</h3>
+      <p>Fill in the form & we'll call you back</p>
+    </div>
+    <div class="card">
+      <div class="icon">📍</div>
+      <h3>Track Delivery</h3>
+      <p>Know exactly where your gas is</p>
+    </div>
+    <div class="card">
+      <div class="icon">💨</div>
+      <h3>All Sizes</h3>
+      <p>5kg · 9kg · 14kg · 19kg · 48kg</p>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <h2>📍 Find Us</h2>
+    <p style="color:#555;font-size:0.95rem;">02 Kingston Road, Evander, Mpumalanga, 2270</p>
+    <div class="flex-row mt-16">
+      <a class="btn btn-whatsapp" href="https://wa.me/27176322026?text=Hi+EPAG%2C+I+would+like+to+order+gas" target="_blank">💬 WhatsApp Us</a>
+      <a class="btn btn-primary" href="tel:0176322026">📞 Call 017 632 2026</a>
+    </div>
+  </div>
+
+  <div class="contact-bar">
+    📍 02 Kingston Road, Evander · 📞 <a href="tel:0176322026">017 632 2026</a> · 💬 WhatsApp same number
+  </div>
 </div>
-</section><section class="section" id="about">
-<h2>About Us</h2>
-<p>Located in Evander, Mpumalanga, EPAG is committed to delivering quality petroleum and gas products. We supply certified Afrox gas and premium fuels to keep your operations running smoothly.</p>
-</section><section class="section" id="contact">
-<h2>Contact Us</h2>
-<p>📍 2 Kingston Road, Evander, Secunda 2280, South Africa</p>
-<p>📞 017 632 2026</p>
-<p><a href="https://www.facebook.com/EvanderPetroleumAndGas" class="btn">Visit Facebook Page</a></p>
-</section><div class="footer">
-<p>© 2026 Evander Petroleum and Gas. All rights reserved.</p>
-</div></body>
-</html>
+
+<!-- ===== ORDER PAGE ===== -->
+<div class="page" id="page-order">
+  <div class="form-card">
+    <h2>📦 Place a Gas Order</h2>
+    <div id="order-alert"></div>
+
+    <label>Your Name *</label>
+    <input type="text" id="o-name" placeholder="e.g. Sipho Dlamini">
+
+    <label>WhatsApp Number *</label>
+    <input type="tel" id="o-phone" placeholder="e.g. 0821234567">
+
+    <label>Delivery Address *</label>
+    <input type="text" id="o-address" placeholder="e.g. 15 Khumalo Street, Evander">
+
+    <label>Select Gas Size *</label>
+    <div class="product-grid" id="product-grid">
+      <div class="product-tile" onclick="selectProduct(this,'5kg')">
+        <div class="kg">5kg</div>
+        <div class="price">Small</div>
+        <div class="desc">Camping / small use</div>
+      </div>
+      <div class="product-tile" onclick="selectProduct(this,'9kg')">
+        <div class="kg">9kg</div>
+        <div class="price">Medium</div>
+        <div class="desc">Home cooking</div>
+      </div>
+      <div class="product-tile" onclick="selectProduct(this,'14kg')">
+        <div class="kg">14kg</div>
+        <div class="price">Large</div>
+        <div class="desc">Large family</div>
+      </div>
+      <div class="product-tile" onclick="selectProduct(this,'19kg')">
+        <div class="kg">19kg</div>
+        <div class="price">XL</div>
+        <div class="desc">Heavy use</div>
+      </div>
+      <div class="product-tile" onclick="selectProduct(this,'48kg')">
+        <div class="kg">48kg</div>
+        <div class="price">Industrial</div>
+        <div class="desc">Bulk / business</div>
+      </div>
+    </div>
+
+    <label>Quantity</label>
+    <input type="number" id="o-qty" value="1" min="1" max="20">
+
+    <label>Special Instructions (optional)</label>
+    <textarea id="o-notes" rows="2" placeholder="e.g. Please call before arriving"></textarea>
+
+    <button class="btn btn-whatsapp btn-block" onclick="submitOrder()">
+      💬 Send Order via WhatsApp
+    </button>
+    <p style="font-size:0.8rem;color:#888;text-align:center;margin-top:8px;">Your order goes straight to our WhatsApp. We'll confirm by phone.</p>
+  </div>
+</div>
+
+<!-- ===== TRACK PAGE ===== -->
+<div class="page" id="page-track">
+  <div class="form-card">
+    <h2>📍 Track Your Delivery</h2>
+    <div class="alert alert-info">Enter the order number you received from us via WhatsApp or phone.</div>
+    <label>Order Number</label>
+    <div class="flex-row" style="align-items:flex-end;">
+      <input type="text" id="track-input" placeholder="e.g. EPAG-0042" style="flex:1;">
+      <button class="btn btn-primary" onclick="trackOrder()">Track</button>
+    </div>
+  </div>
+
+  <div id="track-result" style="display:none;">
+    <div class="form-card">
+      <h2 id="track-order-title">📦 Order #</h2>
+      <div id="track-info" style="font-size:0.9rem;color:#555;margin-bottom:16px;"></div>
+      <div class="track-steps" id="track-steps"></div>
+    </div>
+  </div>
+
+  <div id="track-not-found" style="display:none;">
+    <div class="alert alert-warning">⚠️ Order not found. Please check your order number or call us on <strong>017 632 2026</strong>.</div>
+  </div>
+</div>
+
+<!-- ===== ADMIN PAGE ===== -->
+<div class="page" id="page-admin">
+  <div id="admin-login" class="form-card">
+    <h2>🔒 Admin Login</h2>
+    <label>Password</label>
+    <input type="password" id="admin-pass" placeholder="Enter admin password">
+    <button class="btn btn-primary btn-block" onclick="adminLogin()">Login</button>
+    <p style="font-size:0.75rem;color:#aaa;text-align:center;margin-top:10px;">Default password: <strong>epag2024</strong> — change in the code</p>
+  </div>
+
+  <div id="admin-panel" style="display:none;">
+    <!-- New Order -->
+    <div class="form-card">
+      <h2>➕ New Order (Phone Call)</h2>
+      <div id="new-order-alert"></div>
+      <label>Customer Name *</label>
+      <input type="text" id="a-name" placeholder="Customer name">
+      <label>WhatsApp Number *</label>
+      <input type="tel" id="a-phone" placeholder="e.g. 0821234567">
+      <label>Delivery Address *</label>
+      <input type="text" id="a-address" placeholder="Street, area">
+      <label>Gas Size</label>
+      <select id="a-size">
+        <option value="5kg">5kg</option>
+        <option value="9kg">9kg</option>
+        <option value="14kg" selected>14kg</option>
+        <option value="19kg">19kg</option>
+        <option value="48kg">48kg</option>
+      </select>
+      <label>Quantity</label>
+      <input type="number" id="a-qty" value="1" min="1">
+      <label>Notes</label>
+      <input type="text" id="a-notes" placeholder="Optional notes">
+      <button class="btn btn-primary btn-block" onclick="createOrder()">✅ Create Order & Send WhatsApp</button>
+    </div>
+
+    <!-- Orders List -->
+    <div>
+      <div class="section-title">📋 All Orders <span id="order-count" style="background:var(--red);color:white;padding:2px 10px;border-radius:20px;font-size:0.85rem;"></span></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">
+        <button class="btn btn-sm btn-primary" onclick="filterOrders('all')">All</button>
+        <button class="btn btn-sm" style="background:#fff3cd;color:#856404;" onclick="filterOrders('received')">Received</button>
+        <button class="btn btn-sm" style="background:#cce5ff;color:#004085;" onclick="filterOrders('onway')">On the Way</button>
+        <button class="btn btn-sm" style="background:#d4edda;color:#155724;" onclick="filterOrders('out')">Out for Delivery</button>
+        <button class="btn btn-sm" style="background:#c3e6cb;color:#155724;" onclick="filterOrders('delivered')">Delivered</button>
+        <button class="btn btn-sm btn-red" onclick="clearDelivered()">🗑 Clear Delivered</button>
+      </div>
+      <div class="order-list" id="order-list">
+        <div class="empty-state"><div class="icon">📭</div><p>No orders yet. Add your first order above.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// DATA STORE (localStorage — free, no backend needed)
+// ============================================================
+const ADMIN_PASS = 'epag2024'; // ← Change this password!
+let orders = JSON.parse(localStorage.getItem('epag_orders') || '[]');
+let selectedProduct = '';
+let currentFilter = 'all';
+
+function saveOrders() {
+  localStorage.setItem('epag_orders', JSON.stringify(orders));
+}
+
+function genOrderId() {
+  const num = String(Math.floor(Math.random() * 9000) + 1000);
+  return 'EPAG-' + num;
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  event.target.classList.add('active');
+  if (id === 'admin' && document.getElementById('admin-panel').style.display === 'block') {
+    renderOrders();
+  }
+  if (id === 'track') {
+    document.getElementById('track-result').style.display = 'none';
+    document.getElementById('track-not-found').style.display = 'none';
+  }
+}
+
+// ============================================================
+// PRODUCT SELECTION
+// ============================================================
+function selectProduct(el, size) {
+  document.querySelectorAll('.product-tile').forEach(t => t.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedProduct = size;
+}
+
+// ============================================================
+// CUSTOMER ORDER (sends WhatsApp message to YOU)
+// ============================================================
+function submitOrder() {
+  const name = document.getElementById('o-name').value.trim();
+  const phone = document.getElementById('o-phone').value.trim();
+  const address = document.getElementById('o-address').value.trim();
+  const qty = document.getElementById('o-qty').value;
+  const notes = document.getElementById('o-notes').value.trim();
+  const alertEl = document.getElementById('order-alert');
+
+  if (!name || !phone || !address || !selectedProduct) {
+    alertEl.innerHTML = '<div class="alert alert-warning">⚠️ Please fill in all required fields and select a gas size.</div>';
+    return;
+  }
+
+  const orderId = genOrderId();
+  const msg = encodeURIComponent(
+    `🔥 *NEW ÉPAG ORDER* 🔥\n\n` +
+    `📋 Order: ${orderId}\n` +
+    `👤 Name: ${name}\n` +
+    `📱 Phone: ${phone}\n` +
+    `📍 Address: ${address}\n` +
+    `💨 Gas: ${qty}x ${selectedProduct}\n` +
+    (notes ? `📝 Notes: ${notes}\n` : '') +
+    `\n_Order placed via ÉPAG website_`
+  );
+
+  // Save locally too
+  const order = {
+    id: orderId, name, phone, address,
+    size: selectedProduct, qty, notes,
+    status: 'received',
+    created: new Date().toLocaleString('en-ZA')
+  };
+  orders.unshift(order);
+  saveOrders();
+
+  alertEl.innerHTML = `<div class="alert alert-success">✅ Order ${orderId} created! Opening WhatsApp...</div>`;
+
+  // Open WhatsApp
+  window.open(`https://wa.me/27176322026?text=${msg}`, '_blank');
+
+  // Clear form
+  document.getElementById('o-name').value = '';
+  document.getElementById('o-phone').value = '';
+  document.getElementById('o-address').value = '';
+  document.getElementById('o-qty').value = '1';
+  document.getElementById('o-notes').value = '';
+  selectedProduct = '';
+  document.querySelectorAll('.product-tile').forEach(t => t.classList.remove('selected'));
+}
+
+// ============================================================
+// TRACK ORDER
+// ============================================================
+const STEPS = [
+  { key: 'received', label: 'Order Received', desc: 'We got your order!', icon: '📋' },
+  { key: 'onway', label: 'On the Way', desc: 'Driver is heading out', icon: '🚗' },
+  { key: 'out', label: 'Out for Delivery', desc: 'Your gas is nearly there!', icon: '📍' },
+  { key: 'delivered', label: 'Delivered', desc: 'Enjoy your gas! 🔥', icon: '✅' }
+];
+const STATUS_ORDER = ['received','onway','out','delivered'];
+
+function trackOrder() {
+  const id = document.getElementById('track-input').value.trim().toUpperCase();
+  const resultEl = document.getElementById('track-result');
+  const notFoundEl = document.getElementById('track-not-found');
+  resultEl.style.display = 'none';
+  notFoundEl.style.display = 'none';
+
+  const order = orders.find(o => o.id === id);
+  if (!order) { notFoundEl.style.display = 'block'; return; }
+
+  document.getElementById('track-order-title').textContent = `📦 Order ${order.id}`;
+  document.getElementById('track-info').innerHTML =
+    `<b>${order.name}</b> · ${order.size} × ${order.qty} · ${order.address}<br>Ordered: ${order.created}`;
+
+  const stepsEl = document.getElementById('track-steps');
+  const currentIdx = STATUS_ORDER.indexOf(order.status);
+  stepsEl.innerHTML = STEPS.map((step, i) => {
+    const done = i < currentIdx;
+    const active = i === currentIdx;
+    const dotClass = done ? 'done' : (active ? 'active' : '');
+    const lineClass = done ? 'done' : '';
+    return `
+      <div class="track-step">
+        <div class="step-indicator">
+          <div class="step-dot ${dotClass}">${done ? '✓' : step.icon}</div>
+          ${i < STEPS.length - 1 ? `<div class="step-line ${lineClass}"></div>` : ''}
+        </div>
+        <div class="step-content">
+          <h4 style="color:${active?'var(--navy)':(done?'var(--green)':'#aaa')}">${step.label}</h4>
+          <p>${active ? '<b style="color:var(--navy)">← Current status</b>' : step.desc}</p>
+        </div>
+      </div>`;
+  }).join('');
+
+  resultEl.style.display = 'block';
+}
+
+// ============================================================
+// ADMIN
+// ============================================================
+function adminLogin() {
+  const pass = document.getElementById('admin-pass').value;
+  if (pass === ADMIN_PASS) {
+    document.getElementById('admin-login').style.display = 'none';
+    document.getElementById('admin-panel').style.display = 'block';
+    renderOrders();
+  } else {
+    alert('❌ Wrong password');
+  }
+}
+
+function createOrder() {
+  const name = document.getElementById('a-name').value.trim();
+  const phone = document.getElementById('a-phone').value.trim();
+  const address = document.getElementById('a-address').value.trim();
+  const size = document.getElementById('a-size').value;
+  const qty = document.getElementById('a-qty').value;
+  const notes = document.getElementById('a-notes').value.trim();
+  const alertEl = document.getElementById('new-order-alert');
+
+  if (!name || !phone || !address) {
+    alertEl.innerHTML = '<div class="alert alert-warning">⚠️ Name, phone and address are required.</div>';
+    return;
+  }
+
+  const orderId = genOrderId();
+  const order = {
+    id: orderId, name, phone, address, size, qty, notes,
+    status: 'received',
+    created: new Date().toLocaleString('en-ZA')
+  };
+  orders.unshift(order);
+  saveOrders();
+
+  alertEl.innerHTML = `<div class="alert alert-success">✅ Order <b>${orderId}</b> created!</div>`;
+
+  // Send WhatsApp confirmation to customer
+  sendWhatsApp(order, 'received');
+  renderOrders();
+
+  // Clear
+  document.getElementById('a-name').value = '';
+  document.getElementById('a-phone').value = '';
+  document.getElementById('a-address').value = '';
+  document.getElementById('a-notes').value = '';
+  document.getElementById('a-qty').value = '1';
+}
+
+function updateStatus(orderId, newStatus) {
+  const order = orders.find(o => o.id === orderId);
+  if (!order) return;
+  order.status = newStatus;
+  saveOrders();
+  sendWhatsApp(order, newStatus);
+  renderOrders();
+}
+
+function sendWhatsApp(order, status) {
+  const msgs = {
+    received: `🔥 *ÉPAG – Order Confirmed!* 🔥\n\nHi ${order.name}! Your order has been *received* and will be on its way shortly.\n\n📋 Order: ${order.id}\n💨 Gas: ${order.qty}x ${order.size}\n📍 Delivering to: ${order.address}\n\nTrack your order at our website.\n\n_ÉPAG – 017 632 2026_`,
+    onway: `🚗 *ÉPAG – On the Way!*\n\nHi ${order.name}! Your gas order is *on the way*.\n\n📋 Order: ${order.id}\n💨 ${order.qty}x ${order.size}\n\nPlease be available to receive it.\n\n_ÉPAG – 017 632 2026_`,
+    out: `📍 *ÉPAG – Out for Delivery!*\n\nHi ${order.name}! Your gas is *out for delivery* and arriving very soon! 🎉\n\n📋 Order: ${order.id}\n💨 ${order.qty}x ${order.size}\n\nOur driver is almost at your door!\n\n_ÉPAG – 017 632 2026_`,
+    delivered: `✅ *ÉPAG – Delivered!*\n\nHi ${order.name}! Your gas has been *delivered* successfully. Thank you for choosing ÉPAG! 🔥\n\n📋 Order: ${order.id}\n\nEnjoy! Call us again on *017 632 2026*.\n\n_ÉPAG – Evander Petroleum and Gas_`
+  };
+
+  const phoneNum = order.phone.replace(/\s/g, '').replace(/^0/, '27');
+  const msg = encodeURIComponent(msgs[status] || '');
+  window.open(`https://wa.me/${phoneNum}?text=${msg}`, '_blank');
+}
+
+function filterOrders(filter) {
+  currentFilter = filter;
+  renderOrders();
+}
+
+function clearDelivered() {
+  if (confirm('Remove all delivered orders?')) {
+    orders = orders.filter(o => o.status !== 'delivered');
+    saveOrders();
+    renderOrders();
+  }
+}
+
+function renderOrders() {
+  const listEl = document.getElementById('order-list');
+  let filtered = currentFilter === 'all' ? orders : orders.filter(o => o.status === currentFilter);
+  document.getElementById('order-count').textContent = orders.length;
+
+  if (filtered.length === 0) {
+    listEl.innerHTML = '<div class="empty-state"><div class="icon">📭</div><p>No orders here yet.</p></div>';
+    return;
+  }
+
+  const STATUS_LABELS = {
+    received: { label: 'Received', badge: 'badge-received' },
+    onway: { label: 'On the Way', badge: 'badge-onway' },
+    out: { label: 'Out for Delivery', badge: 'badge-out' },
+    delivered: { label: 'Delivered', badge: 'badge-delivered' }
+  };
+
+  listEl.innerHTML = filtered.map(o => {
+    const s = STATUS_LABELS[o.status] || STATUS_LABELS.received;
+    return `
+    <div class="order-item status-${o.status}">
+      <div class="order-info">
+        <h4>${o.id} · ${o.name}</h4>
+        <p>📱 ${o.phone} · 💨 ${o.qty}x ${o.size} · 📍 ${o.address}</p>
+        <p style="font-size:0.78rem;color:#aaa;">${o.created}${o.notes ? ' · ' + o.notes : ''}</p>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+        <span class="status-badge ${s.badge}">${s.label}</span>
+        <div class="order-actions">
+          ${o.status !== 'received' ? '' : `<button class="btn btn-sm" style="background:#cce5ff;color:#004085;" onclick="updateStatus('${o.id}','onway')">🚗 On Way</button>`}
+          ${o.status !== 'onway' ? '' : `<button class="btn btn-sm btn-green" onclick="updateStatus('${o.id}','out')">📍 Out</button>`}
+          ${o.status !== 'out' ? '' : `<button class="btn btn-sm btn-primary" onclick="updateStatus('${o.id}','delivered')">✅ Delivered</button>`}
+          <button class="btn btn-sm btn-whatsapp" onclick="sendWhatsApp(orders.find(x=>x.id==='${o.id}'),'${o.status}')">💬</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// Auto-login check
+document.addEventListener('DOMContentLoaded', () => {
+  // Show track page if URL has #track
+  if (location.hash === '#track') showPage('track');
+});
+</script>
+</body>
+  </html>
